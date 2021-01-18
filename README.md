@@ -21,8 +21,8 @@ $ cp vendor/unifi-protect-remux/remux ~/bin
 Make sure you setup your NVR:
 
 ```bash
-$ scp vendor/unifi-protect-remux/prepare.sh username@cloudkey2:
 $ echo 'cat ~/.ssh/your_key.pub | ssh username@cloudkey2 "cat >> .ssh/authorized_keys"'
+$ scp vendor/unifi-protect-remux/prepare.sh username@cloudkey2:
 ```
 
 
