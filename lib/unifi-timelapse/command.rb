@@ -138,7 +138,7 @@ module UTL
 
     def generate_concat_file
       file = File.join(opts[:workdir], "concat.txt")
-      file_contents = Dir.glob("%s/*.mp4" % opts[:workdir]).
+      file_contents = Dir.glob("%s/*-*-*.mp4" % opts[:workdir]).
         sort_by{|mf| File.basename(mf) }.
         map do |media_file|
         "file '%s'" % media_file
