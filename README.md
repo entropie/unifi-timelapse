@@ -22,11 +22,24 @@ Make sure you setup your NVR:
 
 ```bash
 $ scp vendor/unifi-protect-remux/prepare.sh username@cloudkey2:
-$ echo 'cat ~/.ssh/your_key.pub | ssh cloudkey2 "cat >> .ssh/authorized_keys"'
+$ echo 'cat ~/.ssh/your_key.pub | ssh username@cloudkey2 "cat >> .ssh/authorized_keys"'
 ```
 
 
 ```bash
+
+$ cat  cat ~/.utl.yaml
+---
+:hostname: ckey2
+:address: 192.168.1.2
+:camera: FCECDA30E675
+:sshopts: "-i ~/.ssh/for_remote"
+:sshuser: mictro
+:workdir: /home/mit/Work
+:server_workdir: /srv/unifi-protect/video/
+:speedup: 0.00027777777
+
+# run for day 2021-01-10
 ./bin/unifi-timelapse.rb --day 2021-01-10 -D
 ```
 
