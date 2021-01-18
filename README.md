@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-unifi-timelapse is a script to get unifi video recordings from the NVR, merge every day to a single file, speed it up and save for
+unifi-timelapse is a script to get unifi video recordings from the NVR, merge every day to a single file, speed it up and save it
 
 ## Install
 
@@ -36,7 +36,7 @@ $ cat ~/.utl.yaml
 :speedup: 0.00027777777
 
 # run for day 2021-01-10
-./bin/unifi-timelapse.rb --day 2021-01-10 -D
+$ ./bin/unifi-timelapse.rb --day 2021-01-10 -D
 ```
 
 ## License
