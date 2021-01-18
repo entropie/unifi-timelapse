@@ -6,14 +6,14 @@
 > Follow the steps in the [documentation](http://graze.github.io/skeleton-project/#quick-start) to set up the project and
 > delete this block quote.
 
-unifi-timelapse is a script to get unifi video recordings from the NVR, merge every day and speed it up
+unifi-timelapse is a script to get unifi video recordings from the NVR, merge every day to a single file, speed it up and save for
 
 ## Install
 
 ```bash
 $ git clone https://github.com/entropie/unifi-timelapse.git
 $ cd unifi-timelapse
-$ cp vendor/unifi-protect-remux ~/bin
+$ cp vendor/unifi-protect-remux/remux ~/bin
 ```
 
 ## Usage
