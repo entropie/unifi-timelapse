@@ -59,10 +59,6 @@ module UTL
       @required_arguments ||= []
       @required_arguments
     end
-  end
-
-
-  class LMakeDay < RCMD
 
     def dev_null_redirection
       "2>&1 /dev/null"
@@ -71,7 +67,11 @@ module UTL
     def ffmpeg_no_output
       "-hide_banner -loglevel panic"
     end
-    
+  end
+
+
+  class LMakeDay < RCMD
+
     def local_path
       File.join(opts[:workdir], "source", UTL.date_to_path(opts[:day]))
     end
@@ -128,6 +128,31 @@ module UTL
 
     def run
       execute "rm -rf '%s'" % [cmdhsh[:local_path]]
+    end
+  end
+
+  class LMerge < RCMD
+    def h
+      "merge single parts to complete file "
+    end
+
+    def generate_concat_file
+      file = File.join(opts[:workdir], "concat.txt")
+      file_contents = Dir.glob("%s/*.mp4" % opts[:workdir]).
+        sort_by{|mf| File.basename(mf) }.
+        map do |media_file|
+        "file '%s'" % media_file
+      end.join("\n")
+      File.open(file, "w+"){|fp| fp.puts(file_contents)}
+      file
+    end
+
+    def merge_files(filename)
+      execute "ffmpeg -f concat -safe 0 -i #{filename} -c copy %s %s" % [ File.join(opts[:workdir], "merged.mp4"), ffmpeg_no_output ]
+    end
+    
+    def run
+      merge_files(generate_concat_file)
     end
   end
   
