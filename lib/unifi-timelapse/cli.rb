@@ -34,7 +34,7 @@ module UTL
       dl = UTL::ProcessDay.new(@opts)
       dl.run
     end
-    
+
     def run
     end
   end
