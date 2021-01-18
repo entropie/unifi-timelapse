@@ -100,7 +100,7 @@ module UTL
         basename = File.basename(mf)
         mpath, mfile = [File.dirname(mf), basename]
         new_filename = File.join(mpath, "speedy-" + mfile)
-        execute "ffmpeg -i #{mf} -vf 'setpts=#{speedup}*PTS' -an '%s' %s" % [new_filename, ffmpeg_no_output]
+        execute "ffmpeg -y -i #{mf} -vf 'setpts=#{speedup}*PTS' -an '%s' %s" % [new_filename, ffmpeg_no_output]
       end
     end
 
@@ -110,7 +110,7 @@ module UTL
       end
       
       Dir.chdir(local_path) do 
-        execute "ffmpeg -f concat -safe 0 -i concat.txt -c copy %s.mp4 %s" % [ File.join(opts[:workdir], opts[:day]), ffmpeg_no_output ]
+        execute "ffmpeg -y -f concat -safe 0 -i concat.txt -c copy %s.mp4 %s" % [ File.join(opts[:workdir], opts[:day]), ffmpeg_no_output ]
       end
     end
     
