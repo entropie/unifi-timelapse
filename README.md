@@ -2,10 +2,6 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-
-> Follow the steps in the [documentation](http://graze.github.io/skeleton-project/#quick-start) to set up the project and
-> delete this block quote.
-
 unifi-timelapse is a script to get unifi video recordings from the NVR, merge every day to a single file, speed it up and save for
 
 ## Install
