@@ -43,19 +43,6 @@ $ cat ~/.utl.yaml
 ./bin/unifi-timelapse.rb --day 2021-01-10 -D
 ```
 
-## Change log
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Testing
-
-```shell
-```
-
-## Credits
-
-- [__entropie__](https://github.com/__entropie__)
-
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
