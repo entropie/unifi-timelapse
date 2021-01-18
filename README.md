@@ -28,7 +28,7 @@ $ echo 'cat ~/.ssh/your_key.pub | ssh username@cloudkey2 "cat >> .ssh/authorized
 
 ```bash
 
-$ cat  cat ~/.utl.yaml
+$ cat ~/.utl.yaml
 ---
 :hostname: ckey2
 :address: 192.168.1.2
