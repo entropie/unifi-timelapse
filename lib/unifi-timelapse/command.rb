@@ -6,14 +6,14 @@ module UTL
     attr_reader   :result
 
     
-    def self.run(what, opts, cmdhsh)
+    def self.run(what, opts, cmdhsh = {})
       info("RCMD:#{what} initialize")
       cmd = what.new(cmdhsh)
       cmd.opts = opts
       return cmd
     end
 
-    def initialize(cmdhsh)
+    def initialize(cmdhsh = {})
       @cmdhsh = cmdhsh
     end
 
