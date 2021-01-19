@@ -1,7 +1,6 @@
 require_relative "unifi-timelapse/config.rb"
 require_relative "unifi-timelapse/arguments.rb"
 require_relative "unifi-timelapse/command.rb"
-require_relative "unifi-timelapse/process-day.rb"
 require_relative "unifi-timelapse/cli.rb"
 
 

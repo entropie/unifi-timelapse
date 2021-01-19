@@ -9,8 +9,16 @@ module UTL
       read_config
     end
 
+    def config_file=(file)
+      @config_file = file
+    end
+
     def config_file
-      config_file = DEFAULT_CONFIG_FILE
+      @config_file ||= DEFAULT_CONFIG_FILE
+    end
+
+    def [](obj)
+      @config[obj]
     end
 
     def config

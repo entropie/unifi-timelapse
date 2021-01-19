@@ -1,13 +1,25 @@
 # coding: utf-8
 module UTL
 
-  class RCMD
+  class CommandComplex
+    attr_reader :arguments
+
+    def all_arguments
+      @all_arguments ||= Arguments.combine_arguments(@arguments)
+    end
+  end
+
+  require_relative "commands/process-day.rb"
+
+
+  class Command
+
     attr_accessor :opts, :cmdhsh
     attr_reader   :result
 
     
     def self.run(what, opts, cmdhsh = {})
-      info("RCMD:#{what} initialize")
+      info("#{what} initialize")
       cmd = what.new(cmdhsh)
       cmd.opts = opts
       return cmd
@@ -15,18 +27,6 @@ module UTL
 
     def initialize(cmdhsh = {})
       @cmdhsh = cmdhsh
-    end
-
-    def cmdprefix
-      "ssh"
-    end
-
-    def sshopts
-      "%s %s@%s" % [opts[:sshopts], opts[:sshuser], opts[:address]]
-    end
-
-    def command
-      "%s" % [cmdprefix]
     end
 
     def validate!
@@ -76,8 +76,21 @@ module UTL
     end
   end
 
+  class RemoteCommand < Command
+    def cmdprefix
+      "ssh"
+    end
 
-  class LMakeDay < RCMD
+    def command
+      "%s" % [cmdprefix]
+    end
+
+    def sshopts
+      "%s %s@%s" % [opts[:sshopts], opts[:sshuser], opts[:hostname]]
+    end
+  end
+
+  class LMakeDay < Command
 
     def local_path
       File.join(opts[:workdir], "source", UTL.date_to_path(opts[:day]))
@@ -128,7 +141,7 @@ module UTL
     end
   end
 
-  class LCleanup < RCMD
+  class LCleanup < Command
     def h
       "deletes workdir/source/YYYY/DD/MM temporary files "
     end
@@ -138,7 +151,7 @@ module UTL
     end
   end
 
-  class LMerge < RCMD
+  class LMerge < Command
     def h
       "merge single parts to complete file "
     end
@@ -163,7 +176,7 @@ module UTL
     end
   end
   
-  class RLS < RCMD
+  class RLS < RemoteCommand
     required :path
     
     def h
@@ -184,6 +197,25 @@ module UTL
     end
   end
 
+  class RListCameras < RLS
+
+    def camera_strings(filesstr)
+      potential_cams = []
+      filesstr.split("\n").each do |filename|
+        potential_cams.push(File.basename(filename).split("_").first)
+      end
+      potential_cams.uniq
+    end
+
+    def result
+      camera_strings(@result)
+    end
+
+    def command
+      "%s %s -- ls '%s'" % [cmdprefix, sshopts, cmdhsh[:path]]
+    end
+  end
+
   class RListUBV < RLS
     required :path
     def h
@@ -195,7 +227,7 @@ module UTL
     end
   end
 
-  class RPrepareRemux < RCMD
+  class RPrepareRemux < RemoteCommand
     required :path
 
     def h
@@ -208,7 +240,7 @@ module UTL
     end
   end
 
-  class RCopyList < RLS
+  class RCopyList < RemoteCommand
     required :fileslist
 
     def h

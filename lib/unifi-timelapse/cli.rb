@@ -28,6 +28,7 @@ module UTL
 
     def parse
       option_parser.parse!
+      option_parser
     end
 
     def process_day
@@ -35,8 +36,16 @@ module UTL
       dl.run
     end
 
-    def run
+    def arguments
+      @arguments = Arguments.combine_arguments(Arguments.new(@opts))
     end
+
+    def list_cameras
+      list_cams = Command.run(RListCameras, arguments, :path => File.join(arguments[:server_workdir], "/*/*/*/*.ubv"))
+      list_cams.run
+      list_cams.result.map{|cs| cs == UTL::C[:camera] ? "_#{cs}_" : cs}.join(", ")
+    end
+
   end
 
 end
