@@ -39,9 +39,16 @@ module UTL
       $stdout.sync = false
       print "     running: #{what}"
       ret = `#{what}`
-      print " ok\n"
-      $stdout.sync = true
-      ret
+      return_value = $?
+      if return_value.exitstatus != 0
+        print " NOPE\n"
+        ""
+      else
+        
+        print " ok\n"
+        $stdout.sync = true
+        ret
+      end
     end
 
     def run
@@ -163,6 +170,11 @@ module UTL
       "run ls on remote"
     end
 
+    def shell_test_exist(path)
+      wo_globs = path.gsub("*", "")
+      "[ -d '%s' ]" % wo_globs
+    end
+
     def command
       "%s %s -- ls '%s'" % [super, sshopts, cmdhsh[:path]]
     end
@@ -179,7 +191,7 @@ module UTL
     end
 
     def command
-      "%s %s -- ls '%s'" % [cmdprefix, sshopts, cmdhsh[:path] + "#{opts[:camera]}_0_rotating_*"]
+      "%s %s -- \"%s && ls %s\"" % [cmdprefix, sshopts, shell_test_exist(cmdhsh[:path]), cmdhsh[:path] + "#{opts[:camera]}_0_rotating_*"]
     end
   end
 
