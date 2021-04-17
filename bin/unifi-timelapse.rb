@@ -6,6 +6,13 @@ require "pp"
 
 run = {}
 
+pause_file = File.join(File.expand_path(UTL::C[:workdir]), "PAUSED")
+if File.exist?(pause_file)
+  puts "> #{__FILE__} suspended; remove file '#{pause_file}' to enable it again"
+  exit 23
+end
+
+
 cli = UTL::Cli.options do |opts, c|
   opts.banner = "#{__FILE__} [OPTION...]"
 
