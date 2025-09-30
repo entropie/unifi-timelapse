@@ -120,7 +120,7 @@ module UTL
         basename = File.basename(mf)
         mpath, mfile = [File.dirname(mf), basename]
         new_filename = File.join(mpath, "speedy-" + mfile)
-        execute "ffmpeg -y -i #{mf} -vf 'setpts=#{speedup}*PTS' -an '%s' %s" % [new_filename, ffmpeg_no_output]
+        execute "ffmpeg -y -i #{mf} -vf 'setpts=#{speedup}*PTS' -an -c:v libx264 -crf 28 '%s' %s" % [new_filename, ffmpeg_no_output]
       end
     end
 
