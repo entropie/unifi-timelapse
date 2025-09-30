@@ -168,7 +168,7 @@ module UTL
     end
 
     def merge_files(filename)
-      execute "ffmpeg -y -f concat -safe 0 -i #{filename} -c copy %s %s" % [ File.join(opts[:workdir], "merged.mp4"), ffmpeg_no_output ]
+      execute "ffmpeg -y -f concat -safe 0 -i #{filename} -vf 'fps=30' -c:v libx264 -crf 20 -an %s %s" % [ File.join(opts[:workdir], "merged.mp4"), ffmpeg_no_output ]
     end
     
     def run
