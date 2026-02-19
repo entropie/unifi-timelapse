@@ -227,18 +227,18 @@ module UTL
     end
   end
 
-  class RPrepareRemux < RemoteCommand
-    required :path
+  # class RPrepareRemux < RemoteCommand
+  #   required :path
 
-    def h
-      "runs remux:prepare.sh on (path)"
-    end
+  #   def h
+  #     "runs remux:prepare.sh on (path)"
+  #   end
 
-    def command
-      "%s %s 'cd %s && %s %s'" % [super, sshopts, cmdhsh[:path], '/.$HOME/prepare.sh', "#{opts[:camera]}_0_rotating_*.ubv"]
+  #   def command
+  #     "%s %s 'cd %s && %s %s'" % [super, sshopts, cmdhsh[:path], '/.$HOME/prepare.sh', "#{opts[:camera]}_0_rotating_*.ubv"]
       
-    end
-  end
+  #   end
+  # end
 
   class RCopyList < RemoteCommand
     required :fileslist

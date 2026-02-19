@@ -25,7 +25,6 @@ module UTL
 
     def run
       # get remote filelist
-
       ls = Command.run(RListUBV, all_arguments, :path => File.join(remote_path, "/*"))
       ls.run
 
@@ -33,14 +32,6 @@ module UTL
         info("no result from remote")
         return false
       end
-
-
-      remux_prepare = Command.run(RPrepareRemux, all_arguments, :path => remote_path)
-      remux_prepare.run
-
-      # # get remote filelist (again)
-      ls = Command.run(RListUBV, all_arguments, :path => File.join(remote_path, "/*"))
-      ls.run
 
       copyfiles = Command.run(RCopyList, all_arguments, :fileslist => ls.result)
       copyfiles.run

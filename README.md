@@ -9,7 +9,8 @@ unifi-timelapse is a script to get unifi video recordings from the NVR, merge ev
 ```bash
 $ git clone https://github.com/entropie/unifi-timelapse.git
 $ cd unifi-timelapse
-$ cp vendor/unifi-protect-remux/remux ~/bin
+# or get the binary for your system at https://github.com/petergeneric/unifi-protect-remux/releases
+$ cp vendor/unifi-protect-remux/remux ~/bin 
 ```
 
 ## Usage
@@ -18,7 +19,6 @@ Make sure you setup your NVR:
 
 ```bash
 $ echo 'cat ~/.ssh/your_key.pub | ssh username@cloudkey2 "cat >> .ssh/authorized_keys"'
-$ scp vendor/unifi-protect-remux/prepare.sh username@cloudkey2:
 ```
 
 
