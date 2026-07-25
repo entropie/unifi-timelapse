@@ -36,6 +36,11 @@ module UTL
       dl.run
     end
 
+    def combine_days
+      dl = UTL::OnlyCombineDays.new(@opts)
+      dl.run
+    end
+    
     def arguments
       @arguments = Arguments.combine_arguments(Arguments.new(@opts))
     end

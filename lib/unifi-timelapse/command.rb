@@ -10,7 +10,7 @@ module UTL
   end
 
   require_relative "commands/process-day.rb"
-
+  require_relative "commands/only-combine-days.rb"
 
   class Command
 
@@ -175,7 +175,8 @@ module UTL
       merge_files(generate_concat_file)
     end
   end
-  
+
+
   class RLS < RemoteCommand
     required :path
     

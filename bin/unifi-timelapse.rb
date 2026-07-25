@@ -45,6 +45,12 @@ cli = UTL::Cli.options do |opts, c|
     c[:speedup] = s
   end
 
+  opts.on("--only-combine-days", "make merged.mp4 from all days in workdir") do |s|
+    run[:combine_days] = lambda {
+      puts c.combine_days
+    }
+  end
+  
   opts.on("-c", "--list-cameras", "list potential camera IDs") do |s|
     run[:listcameras] = lambda { puts c.list_cameras }
   end
